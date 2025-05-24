@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Technologies - AI Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00d4ff, #ff00ff, #00ff88);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .service-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .service-button {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .service-button:hover {
+            background: linear-gradient(45deg, #0099cc, #00d4ff);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .image-gen-button {
+            background: linear-gradient(45deg, #ff00ff, #cc0099);
+        }
+
+        .image-gen-button:hover {
+            background: linear-gradient(45deg, #cc0099, #ff00ff);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5em;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            
+            .service-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <div class="logo-section">
+            <h1 class="logo">Night Technologies</h1>
+            <p class="tagline">Advanced AI Services & Solutions</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" onclick="window.open('https://ai.night-technologies.com', '_blank')">
+                <div class="service-icon">🤖</div>
+                <h2 class="service-title">AI Chat</h2>
+                <p class="service-description">
+                    Engage with powerful AI models for conversations, coding assistance, analysis, and more. Your intelligent AI companion.
+                </p>
+                <a href="https://ai.night-technologies.com" class="service-button" target="_blank">
+                    Launch AI Chat
+                </a>
+            </div>
+
+            <div class="service-card" onclick="window.open('https://image.night-technologies.com', '_blank')">
+                <div class="service-icon">🎨</div>
+                <h2 class="service-title">Image Generation</h2>
+                <p class="service-description">
+                    Create stunning AI-generated images with advanced diffusion models. Turn your imagination into visual reality.
+                </p>
+                <a href="https://image.night-technologies.com" class="service-button image-gen-button" target="_blank">
+                    Generate Images
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Night Technologies - Powered by AI Innovation</p>
+    </div>
+
+    <script>
+        // Create animated stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 100;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Add smooth hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize stars on page load
+        window.addEventListener('load', createStars);
+
+        // Add subtle parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const stars = document.querySelectorAll('.star');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            stars.forEach((star, index) => {
+                const speed = (index % 5) * 0.5;
+                const x = (mouseX * speed) - (speed / 2);
+                const y = (mouseY * speed) - (speed / 2);
+                star.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
